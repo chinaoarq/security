@@ -21,6 +21,7 @@
 <body>
 
     <h4>Directory Traversal Attack: getUserInfo</h4>
+    <h5>also belong to privilege escalation attack.</h5>
 
     <form action="javascript: login()">
         <label>userName</label>
@@ -74,7 +75,7 @@
 
             let requestBody = {
                 "name": document.getElementById("username").value,
-                "password": "111111"
+                "password": document.getElementById("password").value
             };
             xhr.send(JSON.stringify(requestBody));
         }

