@@ -20,7 +20,7 @@
 
 <body>
 
-    <h4>Directory Traversal Attack: updateUser</h4>
+    <h4>Privilege Escalation Attack: updateUser</h4>
 
     <form action="javascript: login()">
         <label>userName</label>
@@ -111,7 +111,9 @@
                 }
             };
 
-            let requestBody = { imgBase64: base64Image.split(',')[1] };
+            let requestBody = {
+                imgBase64: base64Image.split(',')[1]
+            };
             xhr.send(JSON.stringify(requestBody));
         }
 
@@ -143,7 +145,10 @@
                 }
             };
 
-            let requestBody = { userId: userId, avatar: avatarId };
+            let requestBody = {
+                userId: userId,
+                avatar: avatarId
+            };
             xhr.send(JSON.stringify(requestBody));
         }
 
@@ -160,10 +165,11 @@
                 }
             };
 
-            let requestBody = { userId: userId };
+            let requestBody = {
+                userId: userId
+            };
             xhr.send(JSON.stringify(requestBody));
         }
-
     </script>
 </body>
 
