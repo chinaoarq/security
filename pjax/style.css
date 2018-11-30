@@ -1,0 +1,19 @@
+#pages {
+    display: flex;
+}
+
+#pages>div {
+    padding: 5px;
+    margin: 0px 20px;
+    border: 1px solid gainsboro;
+    cursor: pointer;
+}
+
+#pages>div.active {
+    background-color: red;
+    color: white;
+}
+
+#contents {
+    padding: 20px;
+}
