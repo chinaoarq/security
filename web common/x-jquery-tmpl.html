@@ -1,0 +1,33 @@
+<script id="exerciseTemplate" type="text/x-jquery-tmpl"> 
+<div class="exercise-item item">
+	 <div class="row" style="border-bottom:1px solid #e2dfdf;">
+	 <div class="col-xs-6 col-xl-8 col-lg-7 col-md-7">
+		<div class="title">${name}</div>
+		 <div class="details">
+		 	<span>总共：${totalCount}题</span> 
+		    <span>已做：${answeredCount}题</span>
+			{%if statusStr %}<span>状态：${statusStr}</span>{%else%}	<span>状态：未做</span>{%/if%}	 	   
+		</div>
+    </div>
+	<div class="col-xs-6 col-xl-4 col-lg-5 col-md-5 operate">
+ {%if status > 1%}
+	<div class="col-sm-4">
+		<a class="button btn-green" href="javascript: viewAnswer(${id}, ${type})">查看答案</a>
+	</div>
+	<div class="col-sm-4">
+		<a class="button btn-green" href="javascript: testPaper(${id}, ${type}, false)">重新测试</a>
+	</div>
+ {%else%}
+ {%if statusStr && status == 0%}
+	<a  class="button btn-green" href="javascript: testPaper(${id}, ${type}, true)">继续测试</a>
+ {%else%}
+ 	<a class="button btn-green" href="javascript: testPaper(${id}, ${type}, false)">开始测试</a>
+ {%/if%}{%/if%}
+	</div>
+ </div>
+</div>
+</script>
+
+<script type="text/javascript">
+	$("#tag_"+tag).append($("#exerciseTemplate").tmpl(data));
+</script>

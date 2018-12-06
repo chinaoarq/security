@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div class="search">
+        <label>商品名</label>
+        <input type="text" id="productName">
+    
+        <label>颜色</label>
+        <select name="color" id="color">
+            <option value="all">全部</option>
+            <option value="red">红色</option>
+            <option value="yellow">黄色</option>
+        </select>
+    
+        <input type="button" value="搜索" onclick="search()">
+    </div>
+
+    <div id="result"></div>    
+
+    <script>
+        function search(){
+            let productName = document.getElementById("productName").value;
+            let productColor = document.getElementById("color").value;
+
+            ajaxLoad(productName, productColor);   
+        }
+
+        function ajaxLoad(productName, productColor){
+            document.getElementById('result').innerHTML = "loading...";
+            
+            setTimeout(function(){
+                let products = [{ productName: productName, productColor: productColor }];
+                render(products);
+            }, 1000);
+        }
+
+        function render(products){
+            let html = "";
+            products.forEach(function(p){
+                html += '<div class="product">';
+                html += '<span>' + p.productName + '</span>';
+                html += '<span>-----</span>';
+                html += '<span>' + p.productColor + '</span>';
+                html += '</div>';
+            });
+
+            document.getElementById('result').innerHTML = html;
+        }
+    </script>
+</body>
+</html>
