@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+        #tabs {
+            display: flex;
+        }
+
+        #tabs>div {
+            padding: 5px;
+            margin: 0px 20px;
+            border: 1px solid gainsboro;
+            cursor: pointer;
+        }
+
+        #tabs>div.active {
+            background-color: red;
+            color: white;
+        }
+
+        #contents {
+            padding: 20px;
+        }
+    </style>
+    <link rel='stylesheet' href='https://unpkg.com/nprogress@0.2.0/nprogress.css' />
+</head>
+
+<body>
+    <h3>1. how forward/back not refresh</h3>
+    <h3>
+        2. what is pjax
+        <span style="padding-left: 20px;"></span>
+        <label for="useCache">[use cache]</label>
+        <input type="checkbox" name="useCache" id="useCache">
+    </h3>
+    
+    <div id="tabs">
+        <div href="?tab=tab1" name="tab1">Sub Page1</div>
+        <div href="?tab=tab2" name="tab2">Sub Page2</div>
+        <div href="?tab=tab3" name="tab3">Sub Page3</div>
+    </div>
+    <div id="contents">
+    </div>
+</body>
+
+<script src='https://unpkg.com/nprogress@0.2.0/nprogress.js' async></script>
+<script>
+    window.onpopstate = function (event) {
+        console.log('onpopstate ' + JSON.stringify(history.state));
+        loadTabContent();
+    };
+
+    window.onload = function () {
+        console.log('onload');
+        loadTabContent();
+    }
+
+    let $content = document.getElementById("contents");
+    let $tabs = document.getElementById("tabs").getElementsByTagName("div");
+    let g_tab_contents = [];
+
+    for (let i = 0; i < $tabs.length; i++) {
+        $tabs[i].addEventListener('click', function (event) {
+            let tab = event.target.attributes['name'].value;
+            loadTabContent(tab);
+
+            history.pushState({ id: tab }, tab, "?tab=" + tab);
+        });
+    }
+
+    function loadTabContent(tab) {
+        if (!tab) {
+            tab = getUrlVars()['tab'] || 'tab1';
+        }
+
+        let useCache = document.getElementById("useCache").checked;
+        let cachedContent = useCache ? getCachedContent(tab) : null;
+
+        if (cachedContent) {
+            $content.innerHTML = cachedContent;
+        } else {
+            NProgress.start();
+            $content.innerHTML = "loading...";
+
+            setTimeout(function () {
+                let content = ajaxLoad(tab);
+
+                $content.innerHTML = content;
+
+                putContentToCache(tab, content);
+
+                NProgress.done();
+            }, 1000);
+        }
+
+        highlightTab(tab);
+    }
+
+    function ajaxLoad(tab) {
+        let content = "";
+        let i = 0;
+        while (i < 100) {
+            content += tab + ' value ' + i + '<br />';
+            i++;
+        }
+
+        return content;
+    }
+
+    function putContentToCache(key, content) {
+        let cachedContent = getCachedContent(key);
+        if (cachedContent) {
+            cachedContent = { id: key, content: content };
+        } else {
+            g_tab_contents.push({ id: key, content: content });
+        }
+    }
+
+    function getCachedContent(key) {
+        for (let i = 0; i < g_tab_contents.length; i++) {
+            if (g_tab_contents[i].id == key) {
+                return g_tab_contents[i].content;
+            }
+        }
+        return null;
+    }
+
+    function highlightTab(page) {
+        for (let i = 0; i < $tabs.length; i++) {
+            $tabs[i].className = "";
+            if ($tabs[i].attributes['name'].value === page) {
+                $tabs[i].className = "active";
+            }
+        }
+    }
+
+    function getUrlVars() {
+        var vars = [], hash;
+        var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+        for (var i = 0; i < hashes.length; i++) {
+            hash = hashes[i].split('=');
+            vars.push(hash[0]);
+            vars[hash[0]] = hash[1];
+        }
+        return vars;
+    }
+
+</script>
+
+</html>
