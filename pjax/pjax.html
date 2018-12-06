@@ -8,18 +8,14 @@
     <title>Document</title>
 
     <style>
-        #tabs {
-            display: flex;
-        }
-
-        #tabs>div {
+        #tabs>a {
             padding: 5px;
             margin: 0px 20px;
             border: 1px solid gainsboro;
-            cursor: pointer;
+            text-decoration: none;
         }
 
-        #tabs>div.active {
+        #tabs>a.active {
             background-color: red;
             color: white;
         }
@@ -32,6 +28,7 @@
 </head>
 
 <body>
+
     <h3>1. how forward/back not refresh</h3>
     <h3>
         2. what is pjax
@@ -41,9 +38,9 @@
     </h3>
     
     <div id="tabs">
-        <div href="?tab=tab1" name="tab1">Sub Page1</div>
-        <div href="?tab=tab2" name="tab2">Sub Page2</div>
-        <div href="?tab=tab3" name="tab3">Sub Page3</div>
+        <a href="?tab=tab1" name="tab1">Sub Page1</a>
+        <a href="?tab=tab2" name="tab2">Sub Page2</a>
+        <a href="?tab=tab3" name="tab3">Sub Page3</a>
     </div>
     <div id="contents">
     </div>
@@ -59,18 +56,26 @@
     window.onload = function () {
         console.log('onload');
         loadTabContent();
-    }
+    };
 
-    let $content = document.getElementById("contents");
-    let $tabs = document.getElementById("tabs").getElementsByTagName("div");
-    let g_tab_contents = [];
+    var $content = document.getElementById("contents");
+    var $tabs = document.getElementById("tabs").getElementsByTagName("a");
+    var g_tab_contents = [];
 
-    for (let i = 0; i < $tabs.length; i++) {
+    for (var i = 0; i < $tabs.length; i++) {
         $tabs[i].addEventListener('click', function (event) {
-            let tab = event.target.attributes['name'].value;
-            loadTabContent(tab);
+            event.preventDefault();
 
-            history.pushState({ id: tab }, tab, "?tab=" + tab);
+            if (history && history.pushState) {
+                var tab = event.target.attributes['name'].value;
+
+                loadTabContent(tab);
+
+                console.log('push state ' + tab)
+                history.pushState({ id: tab }, tab, "?tab=" + tab);
+            }else{
+                location.assign(event.target.attributes['href'].value);
+            }
         });
     }
 
@@ -79,8 +84,8 @@
             tab = getUrlVars()['tab'] || 'tab1';
         }
 
-        let useCache = document.getElementById("useCache").checked;
-        let cachedContent = useCache ? getCachedContent(tab) : null;
+        var useCache = document.getElementById("useCache").checked;
+        var cachedContent = useCache ? getCachedContent(tab) : null;
 
         if (cachedContent) {
             $content.innerHTML = cachedContent;
@@ -89,7 +94,7 @@
             $content.innerHTML = "loading...";
 
             setTimeout(function () {
-                let content = ajaxLoad(tab);
+                var content = ajaxLoad(tab);
 
                 $content.innerHTML = content;
 
@@ -103,8 +108,8 @@
     }
 
     function ajaxLoad(tab) {
-        let content = "";
-        let i = 0;
+        var content = "";
+        var i = 0;
         while (i < 100) {
             content += tab + ' value ' + i + '<br />';
             i++;
@@ -114,7 +119,7 @@
     }
 
     function putContentToCache(key, content) {
-        let cachedContent = getCachedContent(key);
+        var cachedContent = getCachedContent(key);
         if (cachedContent) {
             cachedContent = { id: key, content: content };
         } else {
@@ -123,7 +128,7 @@
     }
 
     function getCachedContent(key) {
-        for (let i = 0; i < g_tab_contents.length; i++) {
+        for (var i = 0; i < g_tab_contents.length; i++) {
             if (g_tab_contents[i].id == key) {
                 return g_tab_contents[i].content;
             }
@@ -132,7 +137,7 @@
     }
 
     function highlightTab(page) {
-        for (let i = 0; i < $tabs.length; i++) {
+        for (var i = 0; i < $tabs.length; i++) {
             $tabs[i].className = "";
             if ($tabs[i].attributes['name'].value === page) {
                 $tabs[i].className = "active";
