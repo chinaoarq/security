@@ -21,8 +21,7 @@ public class HelloWorld extends HttpServlet {
 
 		request.setAttribute("products", products);
 
-			RequestDispatcher rd;
-		rd = getServletContext().getRequestDispatcher("/products.jsp");
+		RequestDispatcher rd = getServletContext().getRequestDispatcher("/products.jsp");
 		rd.forward(request,response); 
 	}
 

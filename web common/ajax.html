@@ -4,7 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>ajax demo</title>
+
+    <style>
+        .search{
+            padding:10px;
+        }
+
+        #result{
+            margin-top:20px;
+        }
+        .product{
+            padding: 10px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
     <div class="search">
@@ -21,9 +35,11 @@
         <input type="button" value="搜索" onclick="search()">
     </div>
 
-    <div id="result"></div>    
+    <div id="result"></div>
 
     <script>
+        let products = [];
+
         function search(){
             let productName = document.getElementById("productName").value;
             let productColor = document.getElementById("color").value;
@@ -32,25 +48,54 @@
         }
 
         function ajaxLoad(productName, productColor){
-            document.getElementById('result').innerHTML = "loading...";
-            
+            let $result = document.getElementById("result");
+            $result.innerHTML = "loading...";
+
             setTimeout(function(){
-                let products = [{ productName: productName, productColor: productColor }];
-                render(products);
+                products = [];
+                for (let index = 0; index < 10; index++) {
+                    products.push({ id: index, productName: productName  + index, productColor: productColor });
+                }
+
+                let html = renderProductList(products);
+                $result.innerHTML = html;
             }, 1000);
         }
 
-        function render(products){
+        function renderProductList(){
             let html = "";
             products.forEach(function(p){
-                html += '<div class="product">';
+                html += '<div class="product" onclick="showDetail(' + p.id + ');">';
                 html += '<span>' + p.productName + '</span>';
                 html += '<span>-----</span>';
                 html += '<span>' + p.productColor + '</span>';
                 html += '</div>';
             });
 
-            document.getElementById('result').innerHTML = html;
+            return html;
+        }
+
+        function showDetail(productId){
+            document.body.innerHTML = "";
+
+            let html = renderProductInfo(productId);
+
+            document.body.innerHTML = html;
+        }
+
+        function renderProductInfo(productId){
+            let html = "";
+            products.forEach(function(p){
+                if(p.id == productId){
+                    html += '<div class="product">';
+                    html += '<h3>' + p.productName + '</h3>';
+                    html += '<label>ID: </label><span>' + p.id +'</span></ br>';
+                    html += '<label>Color: </label><span>' + p.productColor + '</span>';
+                    html += '</div>';
+                }
+            });
+
+            return html;
         }
     </script>
 </body>
