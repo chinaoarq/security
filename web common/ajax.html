@@ -16,7 +16,6 @@
         }
         .product{
             padding: 10px;
-            cursor: pointer;
         }
     </style>
 </head>
@@ -37,35 +36,45 @@
 
     <div id="result"></div>
 
+
     <script>
-        let products = [];
+        let $result = document.getElementById("result");
+
+        document.addEventListener("DOMContentLoaded", function (event) {
+            $result.innerHTML = "loading js...";
+        });
+
+        window.onload = function(){
+            setTimeout(function(){
+                search();
+            }, 1000);
+        }
 
         function search(){
-            let productName = document.getElementById("productName").value;
+            let productName = document.getElementById("productName").value || 'product ';
             let productColor = document.getElementById("color").value;
 
             ajaxLoad(productName, productColor);   
         }
 
         function ajaxLoad(productName, productColor){
-            let $result = document.getElementById("result");
-            $result.innerHTML = "loading...";
+            $result.innerHTML = "ajax request...";
 
             setTimeout(function(){
-                products = [];
+                var products = [];
                 for (let index = 0; index < 10; index++) {
                     products.push({ id: index, productName: productName  + index, productColor: productColor });
                 }
 
                 let html = renderProductList(products);
                 $result.innerHTML = html;
-            }, 1000);
+            }, 600);
         }
 
-        function renderProductList(){
+        function renderProductList(products){
             let html = "";
             products.forEach(function(p){
-                html += '<div class="product" onclick="showDetail(' + p.id + ');">';
+                html += '<div class="product">';
                 html += '<span>' + p.productName + '</span>';
                 html += '<span>-----</span>';
                 html += '<span>' + p.productColor + '</span>';
@@ -75,28 +84,6 @@
             return html;
         }
 
-        function showDetail(productId){
-            document.body.innerHTML = "";
-
-            let html = renderProductInfo(productId);
-
-            document.body.innerHTML = html;
-        }
-
-        function renderProductInfo(productId){
-            let html = "";
-            products.forEach(function(p){
-                if(p.id == productId){
-                    html += '<div class="product">';
-                    html += '<h3>' + p.productName + '</h3>';
-                    html += '<label>ID: </label><span>' + p.id +'</span></ br>';
-                    html += '<label>Color: </label><span>' + p.productColor + '</span>';
-                    html += '</div>';
-                }
-            });
-
-            return html;
-        }
     </script>
 </body>
 </html>
