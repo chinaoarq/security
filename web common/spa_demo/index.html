@@ -14,7 +14,8 @@
     <header>
         <button onclick="Router.go('home');">home</button>  
         <button onclick="Router.go('page1');">page1</button>  
-        <button onclick="Router.go('page2');">page2</a>        
+        <button onclick="Router.go('page2');">page2</button>        
+        <input type="checkbox" id="router"/ ><label for="router">use route</label>
     </header>
 
     <div id="entry">loading js...</div>
@@ -29,7 +30,7 @@
     <script>
         window.onload = function(){
             let pageName = location.search.replace('?p=', '') || 'home';
-            
+
             Router.go(pageName);
         }
     </script>

@@ -1,6 +1,10 @@
 let Router = (function () {
+    
+    
     let go = function (pageName) {
-        if (!history.state || history.state.pageName != pageName) {
+        let useRoute = document.getElementById('router').checked;
+
+        if (useRoute && (!history.state || history.state.pageName != pageName)) {
             window.history.pushState({pageName}, pageName, '?p=' + pageName);
         }
 

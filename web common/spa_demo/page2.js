@@ -1,20 +1,26 @@
-var Page2 = (function () {
+var Todo = (function () {
 
     //Model
     let page2Data = null;
 
     //Controller 
     let init = function(){
-        if (page2Data) {
+        FakeService.getPage2Data().then(result => {
+            page2Data = result;
+    
             render();
-        }else{
-            FakeService.getPage2Data().then(result => {
-                page2Data = result;
-        
-                render();
-            });
-        }
+        });
     };
+
+    let add = function(content){
+        let newTodo = {};
+        newTodo.id = genNewId();
+        newTodo.content = content;
+        newTodo.done = false;
+        page2Data.content.todos.unshift(newTodo);
+
+        render();
+    }
 
     let update = function(id){
         for (let index = 0; index < page2Data.content.todos.length; index++) {
@@ -34,6 +40,20 @@ var Page2 = (function () {
         document.getElementById("entry").innerHTML = rendered;
     }
 
+    function genNewId(){
+        let newId = 1;
+
+        for (let index = 0; index < page2Data.content.todos.length; index++) {
+            let todoItem = page2Data.content.todos[index];
+
+            if (todoItem.id >= newId) {
+                newId = todoItem.id + 1;
+            }
+        }
+
+        return newId;
+    }
+
     // VIEW
     let template = `
         <h1>{{ pageName }}</h1>
@@ -41,9 +61,12 @@ var Page2 = (function () {
         <h5>{{ content.title }}</h5>
 
         <b>TODO LIST </b>
+        <div>
+            <input type="text" class="todo" placeholder="Enter new todo here.." onkeyup="if (event.keyCode == 13){Todo.add(this.value);}" autofocus/>
+        </div>
         <ul class="todo-list">
         {{#content.todos}}
-            <li class="todo-item" onclick="Page2.update({{id}});">
+            <li class="todo-item" onclick="Todo.update({{id}});">
                 {{#done}}
                 <span class="done">√</span>
                 {{/done}}
@@ -53,7 +76,7 @@ var Page2 = (function () {
         </ul>
     `;
 
-    return { init, update};
+    return { init, add, update};
 }());
 
-Page2.init();
+Todo.init();
