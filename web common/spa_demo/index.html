@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>SPA demo</title>
+
+    <link rel='stylesheet' href='https://unpkg.com/nprogress@0.2.0/nprogress.css' />
+    <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+    <header>
+        <button onclick="Router.go('home');">home</button>  
+        <button onclick="Router.go('page1');">page1</button>  
+        <button onclick="Router.go('page2');">page2</a>        
+    </header>
+
+    <div id="entry">loading js...</div>
+
+    <div id="script"></div>
+
+    <script src='https://unpkg.com/nprogress@0.2.0/nprogress.js' async></script>
+    <script src="https://cdn.bootcss.com/mustache.js/3.0.1/mustache.min.js"></script>
+    <script src="./fake_service.js"></script>
+    <script src="./router.js"></script>
+
+    <script>
+        window.onload = function(){
+            let pageName = location.search.replace('?p=', '') || 'home';
+            
+            Router.go(pageName);
+        }
+    </script>
+</body>
+</html>
