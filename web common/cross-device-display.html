@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+        .name{
+            margin: 0px;
+            padding-top:10px;
+            font-size: 14px;
+            font-weight: bold;
+            text-align: center;
+        }
+        .desc{
+            margin: 0px;
+            padding:10px;
+            font-size:14px;
+        }
+        .question{
+            margin:12px;
+            border: 1px solid #efefef;
+        }
+        .question-stem{
+            color: #666;
+            font-size: 16px;
+            line-height: 26px;
+        }
+        .option{
+            color: #666;
+            font-size: 15px;
+            margin-top: 12px;
+        }
+    </style>
+</head>
+<body style="margin:0px;">
+    <h3>Below are 1 inch height Divs (in differential browsers).</h3>
+
+    <h4>
+        current dpr = <b id="dpr"></b>
+    </h4>
+
+    <div style="height: 94px; width: 373px; border: 1px solid gray; ">
+        <p class="name">375px * 96px</p>
+        <p class="desc">In <b>dpr=1, ppi=96</b> monitors, <br />like PHILIPS 237E (23 inch, 1920*1080).</p>
+    </div>
+
+    <div style="height: 1in; width: 373px; border: 1px solid gray; ">
+        <p class="name">375px * 1in</p>
+        <p class="desc">In <b>dpr=1, ppi=96</b> monitors, <br />like PHILIPS 237E (23 inch, 1920*1080).</p>
+    </div>
+
+    <div style="height: 2.54cm; width: 373px; border: 1px solid gray; ">
+        <p class="name">375px * 2.54cm</p>
+        <p class="desc">In <b>dpr=1, ppi=96</b> monitors, <br />like PHILIPS 237E (23 inch, 1920*1080).</p>
+    </div>
+
+    <div style="height: 72pt; width: 373px; border: 1px solid gray; ">
+        <p class="name">375px * 72pt</p>
+        <p class="desc">In <b>dpr=1, ppi=96</b> monitors, <br />like PHILIPS 237E (23 inch, 1920*1080).</p>
+    </div>
+
+    <div style="height: 161px; width: 373px; border: 1px solid gray; ">
+        <p class="name">375px * 163px</p>
+        <p class="desc">In <b>dpr=2, ppi=326, dpi=163</b> devices, <br />like iphone6/7/8. </p>
+    </div>
+
+    <div style="height: 152px; width: 373px; border: 1px solid gray; ">
+        <p class="name">375px * 154px</p>
+        <p class="desc">In <b>dpr=2, ppi=401, dpi=154</b> devices, <br />like iphone6+/7+/8+. </p>
+    </div>
+
+    <div style="height: 131.5px; width: 373px; border: 1px solid gray; ">
+        <p class="name">375px * 133.5px</p>
+        <p class="desc">In <b>dpr=3, ppi=401</b> devices, <br />like HUAWEI MLA-AL10.</p>
+    </div>
+
+    <div style="height: 154.5px; width: 373px; border: 1px solid gray; ">
+        <p class="name">375px * 156.5px</p>
+        <p class="desc">In <b>dpr=2.625, ppi=411</b> devices, <br />like SAMSUNG SM-A6050.</p>
+    </div>
+    
+
+    <img src="https://s3.cn-north-1.amazonaws.com.cn/discovery/activity/teacher_certi_m.png" alt="img" width="200" />
+
+    <section class="question">
+        <section class="question-stem">
+            下列成语出处依次排列正确的一项是( )呆若木鸡 道路以目 积毁销骨 钩心斗角 请君人瓮
+        </section>
+        <section class="option">
+            A. 《聊斋志异》《左传》《战国策》《阿房宫赋》《史记》
+        </section>
+        <section class="option">
+            B. 《庄子》《国语》《史记》《战国策》《资治通鉴》
+        </section>
+        <section class="option">
+            C. 《聊斋志异》《左传》《史记》《战国策》《史记》
+        </section>
+        <section class="option" >
+            D. 《庄子》《国语》《史记》《阿房宫赋》《资治通鉴》
+        </section>
+    </section>
+
+    <script>
+        window.onload = function(){
+            document.getElementById("dpr").innerHTML = window.devicePixelRatio;
+        };
+    </script>
+</body>
+</html>
