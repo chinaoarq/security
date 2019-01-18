@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Template Editor</title>
+
+    <link rel="stylesheet" href="./assets/mystyles.css">
+    <link rel="stylesheet" href="./assets/ckeditor/plugins/tplaceholder/styles/style.css">
+    <link rel="stylesheet" href="./assets/ckeditor/plugins/tplaceholder2/styles/style.css">
+
+    <style type="text/css">
+        .container{
+            display: flex;
+        }
+
+        #holderContainer{
+            display: flex;
+            margin: 30px 20px;
+            border: 1px #D3D3D3 solid;
+            border-radius: 5px;
+        }
+
+        .holder-group {
+            width: 140px;
+            margin: 30px 20px;
+        }
+
+        .holder-group:first {
+            margin-right: 50px;
+        }
+
+        .holder-group>label{
+            font-weight: bold;
+            display: block;
+            margin-top: 20px;
+        }
+
+        .holder-group>.group-name{
+            font-weight: bold;
+            font-size: 1.17em;
+            margin-block-end: 1em;
+        }
+
+        .holder  {
+            height: 20px;
+            margin: 10px 0px;
+            text-align: center;
+            background: white;
+            border: 1px solid #BBB;
+            cursor: move;
+            -moz-user-select:none;/*火狐*/
+            -webkit-user-select:none;/*webkit浏览器*/
+            -ms-user-select:none;/*IE10*/
+            -khtml-user-select:none;/*早期浏览器*/
+            user-select:none;
+        }
+    </style>
+</head>
+<body>
+    <h2><label for="printSection">Template Editor</label></h2>
+
+    <div class="container">
+        <div id="editorContainer">
+            <div id="printSection">
+                <div id="editor2" contenteditable="true">
+                    <p style="text-align:center"><span style="font-size:24px"><span style="line-height:2">云南财经职业学院继续教育学院</span></span></p>
+                    <p style="text-align:center"><span style="line-height:2"><span style="font-size:36px">学生学籍表</span></span></p>
+                    <p style="text-align:center"><span style="line-height:2">教学点名称：<u>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                &nbsp;&nbsp;</u>&nbsp;&nbsp;类别：函授 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;层次：大专</span></p>
+                    <p style="text-align:center"><span style="line-height:2">班级：<u>&nbsp; &nbsp;</u></span><span tabindex="-1"
+                            contenteditable="false" data-cke-widget-wrapper="1" data-cke-filter="off" class="cke_widget_wrapper cke_widget_inline cke_widget_tplaceholder cke_widget_wrapper_t-placeholder"
+                            data-cke-display-name="tplaceholder" data-cke-widget-id="4" role="region" aria-label="tplaceholder 小部件"><span
+                                class="t-placeholder cke_widget_element" data-cke-widget-data="%7B%22classes%22%3A%7B%22t-placeholder%22%3A1%7D%7D"
+                                data-cke-widget-upcasted="1" data-cke-widget-keep-attr="0" data-widget="tplaceholder">班级</span></span><span
+                            style="line-height:2"><u>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp;</u>&nbsp;&nbsp;学号：<u>&nbsp;
+                                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</u></span></p>
+                    <table align="center" border="1" cellspacing="0">
+                        <tbody>
+                            <tr>
+                                <td rowspan="7" style="height:305px; width:23.1pt">
+                                    <p style="text-align:justify">基 &nbsp;&nbsp;</p>
+                                    <p style="text-align:justify">本</p>
+                                    <p style="text-align:justify">情</p>
+                                    <p style="text-align:justify">况</p>
+                                </td>
+                                <td style="height:31.5500pt; vertical-align:center; width:61.2000pt">
+                                    <p style="text-align:justify">姓 &nbsp;名</p>
+                                </td>
+                                <td colspan="3" style="height:31.5500pt; vertical-align:center; width:58.8000pt">
+                                    <p style="text-align:justify"><span tabindex="-1" contenteditable="false" data-cke-widget-wrapper="1"
+                                            data-cke-filter="off" class="cke_widget_wrapper cke_widget_inline cke_widget_tplaceholder cke_widget_wrapper_t-placeholder"
+                                            data-cke-display-name="tplaceholder" data-cke-widget-id="2" role="region" aria-label="tplaceholder 小部件"><span
+                                                class="t-placeholder cke_widget_element" data-cke-widget-data="%7B%22classes%22%3A%7B%22t-placeholder%22%3A1%7D%7D"
+                                                data-cke-widget-upcasted="1" data-cke-widget-keep-attr="0" data-widget="tplaceholder">姓名</span></span><br></p>
+                                </td>
+                                <td colspan="4" style="height:31.5500pt; vertical-align:center; width:43.0000pt">
+                                    <p style="text-align:justify">性 别</p>
+                                </td>
+                                <td colspan="4" style="height:31.5500pt; vertical-align:center; width:47.7500pt">
+                                    <p style="text-align:justify"><span tabindex="-1" contenteditable="false" data-cke-widget-wrapper="1"
+                                            data-cke-filter="off" class="cke_widget_wrapper cke_widget_inline cke_widget_tplaceholder cke_widget_wrapper_t-placeholder"
+                                            data-cke-display-name="tplaceholder" data-cke-widget-id="3" role="region" aria-label="tplaceholder 小部件"><span
+                                                class="t-placeholder cke_widget_element" data-cke-widget-data="%7B%22classes%22%3A%7B%22t-placeholder%22%3A1%7D%7D"
+                                                data-cke-widget-upcasted="1" data-cke-widget-keep-attr="0" data-widget="tplaceholder">性别</span></span><br></p>
+                                </td>
+                                <td colspan="5" style="height:31.55pt; width:97px">
+                                    <p style="text-align:justify">出生日期</p>
+                                </td>
+                                <td colspan="6" style="height:31.55pt; width:131px">
+                                    <p style="text-align:justify"><span tabindex="-1" contenteditable="false" data-cke-widget-wrapper="1"
+                                            data-cke-filter="off" class="cke_widget_wrapper cke_widget_inline cke_widget_tplaceholder2 cke_widget_wrapper_t-placeholder2"
+                                            data-cke-display-name="tplaceholder2" data-cke-widget-id="1" role="region" aria-label="tplaceholder2 小部件"><span
+                                                title="点击设置日期格式" data-holderid="3" class="t-placeholder2 cke_widget_element"
+                                                data-cke-widget-data="%7B%22text%22%3A%22YYYY%E5%B9%B4MM%E6%9C%88dd%E6%97%A5%22%2C%22classes%22%3A%7B%22t-placeholder2%22%3A1%7D%7D"
+                                                data-cke-widget-upcasted="1" data-cke-widget-keep-attr="0" data-widget="tplaceholder2">YYYY年MM月dd日</span></span><br></p>
+                                </td>
+                                <td colspan="5" rowspan="4" style="height: 183px; width: 100.15pt;">
+                                    <p style="text-align:justify"><br></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="height: 41px; width: 61.2pt;">
+                                    <p style="text-align:justify">籍 &nbsp;贯</p>
+                                </td>
+                                <td colspan="3" style="height: 41px; width: 58.8pt;">
+                                    <p style="text-align:justify"><br></p>
+                                </td>
+                                <td colspan="4" style="height: 41px; width: 43pt;">
+                                    <p style="text-align:justify">民 族</p>
+                                </td>
+                                <td colspan="4" style="height: 41px; width: 47.75pt;">
+                                    <p style="text-align:justify"><br></p>
+                                </td>
+                                <td colspan="5" style="height: 41px; width: 97px;">
+                                    <p style="text-align:justify">政治面貌</p>
+                                </td>
+                                <td colspan="6" style="height: 41px; width: 131px;">
+                                    <p style="text-align:justify"><br></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="height:33.6500pt; vertical-align:center; width:61.2000pt">
+                                    <p style="text-align:justify">工作单位</p>
+                                </td>
+                                <td colspan="11" style="height:33.6500pt; vertical-align:center; width:149.5500pt">
+                                    <p style="text-align:justify"><br></p>
+                                </td>
+                                <td colspan="5" style="height:33.65pt; width:97px">
+                                    <p style="text-align:justify">职 &nbsp;务</p>
+                                </td>
+                                <td colspan="6" style="height:33.65pt; width:131px">
+                                    <p style="text-align:justify"><br></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="height:33.6500pt; vertical-align:center; width:61.2000pt">
+                                    <p style="text-align:justify">家庭住址</p>
+                                </td>
+                                <td colspan="11" style="height:33.6500pt; vertical-align:center; width:149.5500pt">
+                                    <p style="text-align:justify"><br></p>
+                                </td>
+                                <td colspan="5" style="height:33.65pt; width:97px">
+                                    <p style="text-align:justify">联系电话</p>
+                                </td>
+                                <td colspan="6" style="height:33.65pt; width:131px">
+                                    <p style="text-align:justify"><br></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="height:28.7000pt; vertical-align:center; width:61.2000pt">
+                                    <p style="text-align:justify">通讯地址</p>
+                                </td>
+                                <td colspan="16" style="height:28.7pt; width:309px">
+                                    <p style="text-align:justify"><br></p>
+                                </td>
+                                <td colspan="6" style="height:28.7pt; width:131px">
+                                    <p style="text-align:justify">邮政编码</p>
+                                </td>
+                                <td colspan="5" style="height:28.7000pt; vertical-align:center; width:100.1500pt">
+                                    <p style="text-align:justify"><br></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="height:28.7000pt; vertical-align:center; width:61.2000pt">
+                                    <p style="text-align:justify">手 &nbsp;机</p>
+                                </td>
+                                <td colspan="16" style="height:28.7pt; width:309px">
+                                    <p style="text-align:justify"><br></p>
+                                </td>
+                                <td colspan="6" style="height:28.7pt; width:131px">
+                                    <p style="text-align:justify">电子邮箱</p>
+                                </td>
+                                <td colspan="5" style="height:28.7000pt; vertical-align:center; width:100.1500pt">
+                                    <p style="text-align:justify"><br></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="height:34px; width:61.2pt">
+                                    <p style="text-align:justify">身份证号</p>
+                                </td>
+                                <td rowspan="1" colspan="27" style="height:34px; width:21.85pt">
+                                    <p style="text-align:justify"><br></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td rowspan="5" style="height:179px; width:23.1pt">
+                                    <p style="text-align:justify">入学前学历</p>
+                                </td>
+                                <td colspan="10" style="height:24.4500pt; vertical-align:center; width:179.5500pt">
+                                    <p style="text-align:justify">起止时间</p>
+                                </td>
+                                <td colspan="4" style="height:24.4500pt; vertical-align:center; width:50.4000pt">
+                                    <p style="text-align:justify">层次</p>
+                                </td>
+                                <td colspan="6" style="height:24.45pt; width:131px">
+                                    <p style="text-align:justify">专业</p>
+                                </td>
+                                <td colspan="8" style="height:24.45pt; width:211px">
+                                    <p style="text-align:justify">学 校 名 称</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="10" style="height:25.3500pt; vertical-align:center; width:179.5500pt">
+                                    <p style="text-align:justify"><span tabindex="-1" contenteditable="false" data-cke-widget-wrapper="1"
+                                            data-cke-filter="off" class="cke_widget_wrapper cke_widget_inline cke_widget_tplaceholder2 cke_widget_wrapper_t-placeholder2"
+                                            data-cke-display-name="tplaceholder2" data-cke-widget-id="0" role="region" aria-label="tplaceholder2 小部件"><span
+                                                title="点击设置日期格式" data-holderid="201" class="t-placeholder2 cke_widget_element"
+                                                data-cke-widget-data="%7B%22text%22%3A%22YYYY%E5%B9%B4MM%E6%9C%88%20%E8%87%B3%20YYYY%E5%B9%B4MM%E6%9C%88%22%2C%22classes%22%3A%7B%22t-placeholder2%22%3A1%7D%7D"
+                                                data-cke-widget-upcasted="1" data-cke-widget-keep-attr="0" data-widget="tplaceholder2">YYYY年MM月
+                                                至 YYYY年MM月</span></span><br></p>
+                                </td>
+                                <td colspan="4" style="height:25.3500pt; vertical-align:center; width:50.4000pt">
+                                    <p style="text-align:justify"><br></p>
+                                </td>
+                                <td colspan="6" style="height:25.35pt; width:131px">
+                                    <p style="text-align:justify"><br></p>
+                                </td>
+                                <td colspan="8" style="height:25.35pt; width:211px">
+                                    <p style="text-align:justify"><br></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="10" style="height:33px; width:179.55pt">
+                                    <p style="text-align:justify"><br></p>
+                                </td>
+                                <td colspan="4" style="height:33px; width:50.4pt">
+                                    <p style="text-align:justify"><br></p>
+                                </td>
+                                <td colspan="6" style="height:33px; width:131px">
+                                    <p style="text-align:justify"><br></p>
+                                </td>
+                                <td colspan="8" style="height:33px; width:211px">
+                                    <p style="text-align:justify"><br></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="10" style="height:25.3500pt; vertical-align:center; width:179.5500pt">
+                                    <p style="text-align:justify"><br></p>
+                                </td>
+                                <td colspan="4" style="height:25.3500pt; vertical-align:center; width:50.4000pt">
+                                    <p style="text-align:justify"><br></p>
+                                </td>
+                                <td colspan="6" style="height:25.35pt; width:131px">
+                                    <p style="text-align:justify"><br></p>
+                                </td>
+                                <td colspan="8" style="height:25.35pt; width:211px">
+                                    <p style="text-align:justify"><br></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="10" style="height:24.4500pt; vertical-align:center; width:179.5500pt">
+                                    <p style="text-align:justify"><br></p>
+                                </td>
+                                <td colspan="4" style="height:24.4500pt; vertical-align:center; width:50.4000pt">
+                                    <p style="text-align:justify"><br></p>
+                                </td>
+                                <td colspan="6" style="height:24.45pt; width:131px">
+                                    <p style="text-align:justify"><br></p>
+                                </td>
+                                <td colspan="8" style="height:24.45pt; width:211px">
+                                    <p style="text-align:justify"><br></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td rowspan="4" style="height:29.8500pt; vertical-align:center; width:23.1000pt">
+                                    <p style="text-align:justify">在校期间基本情况</p>
+                                </td>
+                                <td colspan="6" style="height:29.8500pt; vertical-align:center; width:147.9500pt">
+                                    <p style="text-align:justify">何时何地何人介绍加入</p>
+                                    <p style="text-align:justify">共青团或中国共产党</p>
+                                </td>
+                                <td colspan="22" style="height:29.8500pt; vertical-align:center; width:307.8500pt">
+                                    <p style="text-align:justify"><br></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="6" style="height:26.5500pt; vertical-align:center; width:147.9500pt">
+                                    <p style="text-align:justify">辅修过何种专业或课程</p>
+                                </td>
+                                <td colspan="22" style="height:26.5500pt; vertical-align:center; width:307.8500pt">
+                                    <p style="text-align:justify"><br></p>
+                                    <p style="text-align:justify"><br></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="6" style="height:30.6000pt; vertical-align:center; width:147.9500pt">
+                                    <p style="text-align:justify">何时因何原因受过何处分</p>
+                                </td>
+                                <td colspan="22" style="height:30.6000pt; vertical-align:center; width:307.8500pt">
+                                    <p style="text-align:justify"><br></p>
+                                    <p style="text-align:justify"><br></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="6" style="height:29.8500pt; vertical-align:center; width:147.9500pt">
+                                    <p style="text-align:justify">受过何奖励</p>
+                                </td>
+                                <td colspan="22" style="height:29.8500pt; vertical-align:center; width:307.8500pt">
+                                    <p style="text-align:justify"><br></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="height:64.5500pt; vertical-align:center; width:23.1000pt">
+                                    <p style="text-align:justify">学籍异动</p>
+                                </td>
+                                <td colspan="28" style="height:64.5500pt; vertical-align:center; width:455.8000pt">
+                                    <p style="text-align:justify"><br></p>
+                                    <p style="text-align:justify"><br></p>
+                                    <p style="text-align:justify"><br></p>
+                                    <p style="text-align:justify"><br></p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>>
+                </div>
+            </div>
+        </div>
+
+        <div id="holderContainer"></div>
+    </div>
+
+    <script src="./assets/ckeditor/ckeditor.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/jsrender/1.0.1/jsrender.min.js"></script>
+
+    <script id="myTmpl" type="text/x-jsrender">
+        <div class="holder-group">
+            <div class="group-name">基本信息</div>
+            {{for basicHolders}}
+            <div class="holder" data-holderid="{{:id}}" draggable="true" tabindex="{{:#index}}">{{:name}}</div>
+            {{/for}}
+        </div>
+        <div class="holder-group">
+            <div class="group-name">经历信息</div>
+
+            {{for recordHolders}}
+            <label>{{:groupName}}</label>
+            {{for subHolders}}
+            <div class="holder" data-holderid="{{:id}}" draggable="true" tabindex="{{:#index}}">{{:name}}</div>
+            {{/for}}
+            {{/for}}
+        </div>
+    </script>
+
+    <script>
+        'use strict';
+
+        var HOLDERS = {
+            basicHolders: [{ id: 1, name: '姓名' }, { id: 2, name: '性别' }, { id: 3, name: '出生年月', formatable: true, defaultformat: 'YYYY年MM月dd日' }, { id: 4, name: '民族' }, 
+                { id: 5, name: '身份证号' }, { id: 6, name: '籍贯' }, { id: 7, name: '文化程度' }, { id: 8, name: '婚否' }, 
+                { id: 9, name: '政治面貌' }, { id: 10, name: '公/自费' }, { id: 11, name: '成人高考准考证号' }, { id: 12, name: '学习形式' }, 
+                { id: 13, name: '培养层次' }, { id: 14, name: '专业' }, { id: 15, name: '班级' }, { id: 16, name: '学号' }, 
+                { id: 17, name: '家庭通信地址' }, { id: 18, name: '邮政编码' }, { id: 19, name: '手机' }, { id: 20, name: '电子邮箱' }, 
+                { id: 21, name: '入学前受奖励处分' }, { id: 22, name: '入学前工作单位' }, { id: 23, name: '入学前工作职务' }],
+            recordHolders: [
+                { groupName: '入学前学历', subHolders: [{ id: 101, name: '起讫年月', formatable: true, defaultformat: 'YYYY年MM月 至 YYYY年MM月' }, { id: 102, name: '学校名称、任职' }, { id: 103, name: '证明人' }] },
+                { groupName: '工作经历', subHolders: [{ id: 201, name: '起讫年月', formatable: true, defaultformat: 'YYYY年MM月 至 YYYY年MM月' }, { id: 202, name: '工作单位、任职' }, { id: 203, name: '证明人' }] },
+                { groupName: '家庭主要成员', subHolders: [{ id: 301, name: '称谓' }, { id: 302, name: '姓名' }, { id: 303, name: '在何处任何职' }] },
+                { groupName: '入学成绩', subHolders: [{ id: 401, name: '总分' }, { id: 402, name: '语文' }, { id: 403, name: '数学' }, 
+                    { id: 404, name: '英语' }, { id: 405, name: '政治' }, { id: 406, name: '化学/物理' }, { id: 407, name: '哲学/历史' }] }]
+        };
+
+        function getHolderById(id){
+            var holder = null;
+            for (var index = 0; index < HOLDERS.basicHolders.length; index++) {
+                holder = HOLDERS.basicHolders[index];
+                if (holder.id == id) {
+                    return holder;
+                }
+            }
+
+            for (var index = 0; index < HOLDERS.recordHolders.length; index++) {
+                for (var j = 0; j < HOLDERS.recordHolders[index].subHolders.length; j++) {
+                    holder = HOLDERS.recordHolders[index].subHolders[j];
+                    if (holder.id == id) {
+                        return holder;
+                    }
+                }
+            }
+
+            return null;
+        }
+        
+        CKEDITOR.disableAutoInline = true;
+
+        CKEDITOR.on('instanceReady', function () {
+            loadContact();
+
+            // When an item in the holder list is dragged, copy its data into the drag and drop data transfer.
+            // This data is later read by the editor#paste listener in the hcard plugin defined above.
+            CKEDITOR.document.getById('holderContainer').on('dragstart', function (evt) {
+                // The target may be some element inside the draggable div (e.g. the image), so get the div.h-card.
+                var target = evt.data.getTarget().getAscendant('div', true);
+
+                // Initialization of the CKEditor data transfer facade is a necessary step to extend and unify native
+                // browser capabilities. For instance, Internet Explorer does not support any other data type than 'text' and 'URL'.
+                // Note: evt is an instance of CKEDITOR.dom.event, not a native event.
+                CKEDITOR.plugins.clipboard.initDragDataTransfer(evt);
+
+                var dataTransfer = evt.data.dataTransfer;
+
+                // Pass an object with holder details. Based on it, the editor#paste listener in the hcard plugin
+                // will create the HTML code to be inserted into the editor. You could set 'text/html' here as well, but:
+                // * It is a more elegant and logical solution that this logic is kept in the hcard plugin.
+                // * You do not know now where the content will be dropped and the HTML to be inserted
+                // might vary depending on the drop target.
+                var targetHolder = getHolderById(target.data('holderid'));
+                if (targetHolder.formatable) {
+                    dataTransfer.setData('tplaceholder2', targetHolder);
+                }else{
+                    dataTransfer.setData('tplaceholder', targetHolder);
+                }
+
+                // You need to set some normal data types to backup values for two reasons:
+                // * In some browsers this is necessary to enable drag and drop into text in the editor.
+                // * The content may be dropped in another place than the editor.
+                dataTransfer.setData('text/html', target.getText());
+            });
+        });
+
+        function loadContact() {
+            var tmpl = $.templates("#myTmpl");      // Get compiled template
+            var html = tmpl.render(HOLDERS);       // Render template using data - as HTML string
+            $("#holderContainer").html(html);           // Insert HTML string into DOM
+        }
+        
+        CKEDITOR.inline('editor2', {
+            toolbar: [
+                { name: 'clipboard', items: ['Undo', 'Redo'] },
+                { name: 'styles', items: ['Format', 'FontSize', 'lineheight'] },
+                { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike', 'RemoveFormat', 'CopyFormatting', 'LineHeight'] },
+                { name: 'align', items: ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'] },
+                { name: 'insert', items: ['Table'] }
+            ],
+            // Since we define all configuration options here, let's instruct CKEditor to not load config.js which it does by default.
+            // One HTTP request less will result in a faster startup time.
+            // For more information check http://docs.ckeditor.com/ckeditor4/docs/#!/api/CKEDITOR.config-cfg-customConfig
+            customConfig: '',
+            // Enabling extra plugins, available in the standard-all preset: http://ckeditor.com/presets-all
+            extraPlugins: 'lineheight, tplaceholder, tplaceholder2',
+
+            /*********************** File management support ***********************/
+            // In order to turn on support for file uploads, CKEditor has to be configured to use some server side
+            // solution with file upload/management capabilities, like for example CKFinder.
+            // For more information see http://docs.ckeditor.com/ckeditor4/docs/#!/guide/dev_ckfinder_integration
+            // Uncomment and correct these lines after you setup your local CKFinder instance.
+            // filebrowserBrowseUrl: 'http://example.com/ckfinder/ckfinder.html',
+            // filebrowserUploadUrl: 'http://example.com/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+            /*********************** File management support ***********************/
+            // Make the editing area bigger than default.
+            //height: 600,
+            // Reduce the list of block elements listed in the Format dropdown to the most commonly used.
+            format_tags: 'p;h1;h2;h3',
+            // Simplify the Image and Link dialog windows. The "Advanced" tab is not needed in most cases.
+            removeDialogTabs: 'image:advanced;link:advanced',
+            // Define the list of styles which should be available in the Styles dropdown list.
+            // If the "class" attribute is used to style an element, make sure to define the style for the class in "mystyles.css"
+            // (and on your website so that it rendered in the same way).
+            // Note: by default CKEditor looks for styles.js file. Defining stylesSet inline (as below) stops CKEditor from loading
+            // that file, which means one HTTP request less (and a faster startup).
+            // For more information see http://docs.ckeditor.com/ckeditor4/docs/#!/guide/dev_styles
+            stylesSet: [
+                /* Object Styles */
+                {
+                    name: 'Compact table',
+                    element: 'table',
+                    attributes: {
+                        cellpadding: '5',
+                        cellspacing: '0',
+                        border: '1',
+                        bordercolor: '#ccc'
+                    },
+                    styles: {
+                        'border-collapse': 'collapse'
+                    }
+                },
+                { name: 'Borderless Table', element: 'table', styles: { 'border-style': 'hidden' } }
+            ]
+        });
+    </script>
+
+</body>
+</html>

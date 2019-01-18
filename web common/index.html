@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+        .container{
+            display: flex;
+        }
+        .source-container{
+            height: 200px;
+            width: 200px;
+        }
+
+        .draggable {
+            width: 200px;
+            height: 20px;
+            text-align: center;
+            background: white;
+            border: 1px solid #BBB;
+            cursor: move;
+            -moz-user-select:none;/*火狐*/
+            -webkit-user-select:none;/*webkit浏览器*/
+            -ms-user-select:none;/*IE10*/
+            -khtml-user-select:none;/*早期浏览器*/
+            user-select:none;
+        }
+        
+        .target-container > div{
+            width: 200px;
+            height: 20px;
+            background: blueviolet;
+            margin-bottom: 10px;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="target-container">
+            <div class="dropzone onlyOne"></div>
+            <div class="dropzone onlyOne"></div>
+            <div class="dropzone onlyOne"></div>
+            <div class="dropzone onlyOne"></div>
+        </div>
+        
+        <div class="dropzone source-container">
+            <div id="studyNmber" class="draggable" draggable="true" ondragstart="dragstart_handler(event);">学号</div>
+            <div id="displayName" class="draggable" draggable="true" ondragstart="dragstart_handler(event);">姓名</div>
+            <div id="phone" class="draggable" draggable="true" ondragstart="dragstart_handler(event);">手机号</div>
+        </div>
+    </div>
+
+    
+    <script>
+        var dragged;
+
+        function dragstart_handler(event){
+            dragged = event.target;
+            event.target.style.opacity = .5;
+
+            event.dropEffect = "move";
+        }
+
+        function bindEvent(ele, event, func){
+            if (ele.addEventListener) {
+                ele.addEventListener(event, func, false);
+            }
+            else {
+                ele.attachEvent("on" + event, func);
+            }
+        }
+
+        var draggables = document.getElementsByClassName('draggable');
+        for (let index = 0; index < draggables.length; index++) {
+            const element = draggables[index];
+            
+            element.addEventListener('selectstart', function (evt) {
+                this.dragDrop();
+                return false;
+            }, false);
+        }
+        
+        bindEvent(document, "dragend", function (event) {
+            // 重置透明度
+            event.target.style.opacity = "";
+        });
+
+        /* 放置目标元素时触发事件 */
+        bindEvent(document, "dragover", function (event) {
+            // 阻止默认动作以启用drop
+            event.preventDefault();
+
+            event.dataTransfer.dropEffect = "move"
+        });
+
+        bindEvent(document, "dragenter", function (event) {
+            // 当可拖动的元素进入可放置的目标时高亮目标节点
+            if (canDrop(event.target)) {
+                event.target.style.background = "purple";
+            }else{
+                event.target.style.background = "";
+            }
+        });
+
+        bindEvent(document, "dragleave", function (event) {
+            // 当拖动元素离开可放置目标节点，重置其背景
+            if (event.target.className.indexOf("dropzone") !== -1) {
+                event.target.style.background = "";
+            }
+        });
+
+        bindEvent(document, "drop", function (event) {
+            // 阻止默认动作（如打开一些元素的链接）
+            event.preventDefault();
+            // 将拖动的元素到所选择的放置目标节点中
+
+            if (canDrop(event.target)) {
+                event.target.style.background = "";
+
+                dragged.parentNode.removeChild(dragged);
+                event.target.appendChild(dragged);
+            }
+        });
+
+        function canDrop(target){
+            if (target.className.indexOf("dropzone") == -1) {
+                return false;
+            }
+
+            if(target.innerHTML.indexOf('draggable') !== -1 && target.className.indexOf('onlyOne') !== -1){
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+</body>
+</html>

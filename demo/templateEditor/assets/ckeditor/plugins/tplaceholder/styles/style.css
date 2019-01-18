@@ -1,0 +1,18 @@
+.t-placeholder {
+    background: #FFFDE3;
+    padding: 1px 3px;
+    margin-bottom: 3px;
+    /* font-style: italic; */
+}
+.t-placeholder::before,
+.t-placeholder::after {
+    font-style: normal;
+}
+/* 
+.t-placeholder::before {
+    content: "[[";
+}
+
+.t-placeholder::after {
+    content: "]]";
+} */

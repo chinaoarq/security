@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito+Sans:200,200i,400,400i,600,600i,700,700i');
+
+@media print {
+    body * {
+        visibility: hidden;
+        margin: 0px auto;
+    }
+    #printSection, #printSection * {
+        visibility: visible;
+    }
+    #printSection {
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+}
+
+#editorContainer {
+    width: 19cm;
+    padding: 1cm 1cm 2cm;
+    border: 1px #D3D3D3 solid;
+    border-radius: 5px;
+    background: white;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+#editor2 {
+    min-height: 25cm
+}
+#editor2 p{
+    margin: 0px;
+}
+
+#editor2 td, #editor2 th {
+    font-size: 0.9em;
+}
+
+#editor2 h1 {
+    margin-bottom:1cm;
+}
+
+#editor2 table {
+    border-collapse: separate;
+    border-spacing: 0px;
+}
