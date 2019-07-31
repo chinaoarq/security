@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="js/swfobject.js"></script>
+    <script type="text/javascript" src="js/ckplayer_old/ckplayer.js"></script>
+</head>
+<body>
+
+    <div class="play">
+        <div id="a1" style='height:100%'>
+            <div id="flashplayer"></div>
+        </div>
+    </div>
+    
+<script>
+    //flv use ckplayer
+    var flashvars = {
+        //f: 'http://7u2k2m.com2.z0.glb.qiniucdn.com/cdn/xnjt/course/182/screen/1/1/screen.flv',
+        f: 'http://7u2k2m.com2.z0.glb.qiniucdn.com/cdn/xbgy/course/192/%E7%AC%AC%E5%9B%9B%E7%AB%A0%20%E5%94%90%E5%AE%8B%E8%AF%8D/4.03/Video01.mp4',
+        c: 0,
+        loaded: 'FLVPlayerCallbacks'
+    };
+    var fheight = "600px";
+    var fweight = "800px";
+    var params = { bgcolor: '#ffffff', allowFullScreen: true, allowScriptAccess: 'always', wmode: 'transparent' };
+    CKobject.embedSWF(
+        'ckplayer_old/ckplayer.swf',
+        'a1',
+        'flashplayer',
+        fweight,
+        fheight,
+        flashvars,
+        params
+    );
+    
+    /*CKPlayer listeners*/
+    function FLVPlayerCallbacks() {
+        CKobject.getObjectById('flashplayer').addListener('sendNetStream', 'FLVPlayerLoadedHandler');//播放器接受到视频流
+        CKobject.getObjectById('flashplayer').addListener('time', 'FLVPlayerTimeHandler');//返回当前播放时间
+        CKobject.getObjectById('flashplayer').addListener('seeking', 'FLVPlayerTimeHandler');//即视频进行跳转时，返回要跳转的时间点
+
+        //TOOD: listen pause/start event
+        //TODO: swplayer cannot play flv ?
+    }
+
+    var videoLoaded = false;
+    function FLVPlayerLoadedHandler() {
+        videoLoaded = true;
+        console.log('start')
+    }
+
+    function FLVPlayerTimeHandler() {
+        if (videoLoaded) {
+            var time = CKobject.getObjectById('flashplayer').getStatus().time;
+            if (time > 1) {
+                console.log(time);
+            }
+        }
+    }
+</script>
+</body>
+</html>

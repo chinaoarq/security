@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>On Before Unload</title>
+    <meta charset="utf-8" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+</head>
+
+<body>
+    <section>
+        <p>The first two links provided should go to their respective targets, the third link should cause the dialogue
+            to appear as should refreshing and trying to exit.</p>
+        <a href="/" id="homebtn">Go to Home</a><br />
+        <a href="http://google.com" id="googlebtn">Go to Google</a><br />
+        <a href="http://google.com">Go to Google (this should cause a popup)</a><br />
+    </section>
+    <script>
+       window.onbeforeunload = function (e) {
+           console.log('unload');
+
+            var e = e || window.event;
+
+            console.log(e);
+            
+            // For IE and Firefox prior to version 4
+            if (e) {
+                e.returnValue = 'Any string';
+            }
+
+            // For Safari
+            return 'Any string';
+        };
+    </script>
+</body>
+
+</html>

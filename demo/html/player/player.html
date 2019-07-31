@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/ckplayer/ckplayer.js"></script>
+
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/3.3.7/css/bootstrap-theme.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="modal fade" id="coursewarePreviewModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">课件预览</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="video-body">
+                        <div id="slideMulu">
+                            <div id="toggleMulu">展开/收起目录</div>
+                            <div id="muluContent"></div>
+                        </div>
+
+                            <div id="video" style="height:400px;"></div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <button onclick="play()">play</button>
+
+    <script type="text/javascript">
+        var videoObject = {
+            container: '#video',//“#”代表容器的ID，“.”或“”代表容器的class
+            variable: 'player2',//该属性必需设置，值等于下面的new chplayer()的对象
+            autoplay: true,
+            //video: 'http://7u2k2m.com2.z0.glb.qiniucdn.com/cdn/xnjt/course/182/screen/1/1/screen.flv',
+            video: 'https://qotest.qsxt.info/cdn/testdg/course/T44/222/444/degree/testdg_1617917_161791720181218153933546.mp4',
+            //video: 'http://7u2k2m.com2.z0.glb.qiniucdn.com/cdn/xbgy/course/192/%E7%AC%AC%E5%9B%9B%E7%AB%A0%20%E5%94%90%E5%AE%8B%E8%AF%8D/4.03/Video01.mp4',
+            loaded: 'loadedHandler'
+        };
+
+        var player2 = new ckplayer(videoObject);
+
+        function loadedHandler() {//播放器加载后会调用该函数
+            console.log('video loaded');
+
+            player2.addListener('play', onCKPlayerPlay);
+            player2.addListener('pause', onPause);
+        }
+
+        function onTimeChange(time) {
+            console.log('time change' + time);
+        }
+
+        function onPause() {
+            console.log('ck pause');
+        }
+        
+    function play() {
+        $("#coursewarePreviewModal").modal();
+    }
+        
+    function onCKPlayerPlay() {
+        console.log('ck onStart');
+    }
+
+    </script>
+</body>
+</html>

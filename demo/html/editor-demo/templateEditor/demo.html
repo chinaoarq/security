@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Template Editor</title>
+
+</head>
+<body>
+    <h2><label for="printSection">Template Editor</label></h2>
+
+    <div class="container">
+        <div id="editorContainer">
+            <div id="printSection">
+                <div id="editor1"></div>
+                <div id="editor2"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script src="./assets/ckeditor/ckeditor.js"></script>
+
+
+    <script>
+        'use strict';
+
+        CKEDITOR.disableAutoInline = true;
+
+        CKEDITOR.replace('editor1', { customConfig: 'config.cust.simple.js'} );
+
+        CKEDITOR.replace('editor2', { customConfig: 'config.cust.doc.js'} );
+            
+    </script>
+
+</body>
+</html>
